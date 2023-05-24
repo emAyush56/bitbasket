@@ -21,7 +21,7 @@ function CreateBasketModal({ isCreateBasket, setIsCreateBasket }) {
 
   return (
     <div className="modal-wrapper">
-      <div className="overlay fixed inset-0 flex h-screen w-full items-center justify-center bg-black/10">
+      <div className="overlay fixed inset-0 z-[1] flex h-screen w-full items-center justify-center bg-black/10">
         <div className="modal-content relative w-96 rounded-lg bg-white px-4 py-6">
           <div
             onClick={() => createBasketToggler()}
