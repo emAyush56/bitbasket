@@ -8,8 +8,6 @@ function List() {
   const history = useNavigate();
   const { currency, symbol } = CryptoState();
 
-  console.log(currency);
-
   const [popularCurrData, setPopularCurrData] = useState([]);
 
   const getPopularCurr = async () => {

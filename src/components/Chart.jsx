@@ -30,8 +30,6 @@ export default function Chart({ crypto }) {
     getHistoricalData();
   }, [currency, days]);
 
-  console.log(historicalData);
-
   const graphData = historicalData
     ? historicalData.map((item) => {
         const [timestamp, price] = item;

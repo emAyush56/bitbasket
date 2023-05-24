@@ -18,8 +18,6 @@ function Crypto() {
     getSingleCrypto();
   }, []);
 
-  console.log("SINGLE: ", crypto);
-
   if (!crypto) return "Loading...";
 
   return (
