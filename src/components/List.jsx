@@ -6,14 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { CryptoState } from "../utils/CryptoContext";
 function List() {
   const history = useNavigate();
-  const { currency, symbol } = CryptoState();
-
-  const [popularCurrData, setPopularCurrData] = useState([]);
-
-  const getPopularCurr = async () => {
-    const { data } = await axios.get(PopularCurr(currency));
-    setPopularCurrData(data);
-  };
+  const { currency, symbol, popularCurrData, getPopularCurr } = CryptoState();
 
   useEffect(() => {
     getPopularCurr();

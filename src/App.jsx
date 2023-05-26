@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Home from "./page/Home";
 import Crypto from "./page/Crypto";
 import Mobile from "./page/Mobile";
+import Basket from "./components/Basket";
 
 function App() {
   return (
@@ -19,10 +20,16 @@ function App() {
         <div className="right mt-4 w-full">
           <Routes>
             <Route path="*" element={<Home />} />
+            <Route path="/basket" element={<Basket />} />
             <Route path="/coins/:id" element={<Crypto />} />
           </Routes>
         </div>
       </main>
+      {/* <footer className="mt-14 text-center">
+        <span className="block text-xs text-gray-600">
+          Made by Ayush, Debarshi and Swarnali
+        </span>
+      </footer> */}
     </>
   );
 }

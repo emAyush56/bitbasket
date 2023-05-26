@@ -1,17 +1,51 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HistoricalChart, SingleCrypto } from "../api-config/api";
 import { PriceFormatter } from "../utils/utils";
 import Chart from "../components/Chart";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { CryptoState } from "../utils/CryptoContext";
 
 function Crypto() {
+  const { basket, user } = CryptoState();
   const { id } = useParams();
   const [crypto, setCrypto] = useState();
 
   const getSingleCrypto = async () => {
     const { data } = await axios.get(SingleCrypto(id));
     setCrypto(data);
+  };
+
+  const inBasket = basket.includes(crypto?.id);
+
+  const addToBasket = async () => {
+    const cryptoRef = doc(db, "basket", user.uid);
+    try {
+      await setDoc(cryptoRef, {
+        coins: basket ? [...basket, crypto?.id] : [crypto?.id],
+      });
+      alert(`${crypto.name} added to the basket!`);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const removeFromBasket = async () => {
+    const cryptoRef = doc(db, "basket", user.uid);
+    try {
+      await setDoc(
+        cryptoRef,
+        {
+          coins: basket.filter((watch) => watch !== crypto?.id),
+        },
+        { merge: true }
+      );
+      alert(`${crypto.name} removed from the basket!`);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   useEffect(() => {
@@ -32,6 +66,22 @@ function Crypto() {
                   {crypto.symbol.toUpperCase()}
                 </span>
               </div>
+              {user && (
+                <button
+                  onClick={inBasket ? removeFromBasket : addToBasket}
+                  className={`ml-5 flex items-center justify-center rounded-full px-5 py-1 transition-all hover:scale-105 active:scale-95 ${
+                    inBasket ? "bg-orange-600 text-white" : "bg-yellow-400"
+                  }`}
+                >
+                  {inBasket ? (
+                    "- Remove from basket"
+                  ) : (
+                    <span className="flex items-center justify-center">
+                      <PlusIcon className="mr-2 h-5 w-5" /> Add to basket
+                    </span>
+                  )}
+                </button>
+              )}
               <span className="price ml-auto text-2xl font-medium">
                 ₹{PriceFormatter(crypto.market_data.current_price.inr, 2)}
               </span>
@@ -70,6 +120,25 @@ function Crypto() {
         </div>
       )}
     </div>
+  );
+}
+
+function PlusIcon({ className }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+      />
+    </svg>
   );
 }
 
