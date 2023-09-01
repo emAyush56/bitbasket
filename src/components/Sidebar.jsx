@@ -49,7 +49,7 @@ function Sidebar() {
             <div className="w-[300px] text-center">
               <div className="mx-auto my-4">
                 <h3 className="text-lg font-semibold text-gray-800">
-                  Welcome Back!
+                  Let's log you in
                 </h3>
                 <div className="mt-4 space-y-3">
                   <button
@@ -57,9 +57,6 @@ function Sidebar() {
                     className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-yellow-400 px-8 py-1.5 transition-all hover:scale-105 active:scale-95"
                   >
                     Signin with<span className="font-medium">Google</span>
-                  </button>
-                  <button className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-400 px-8 py-1.5 transition-all hover:scale-105 active:scale-95">
-                    Signin with<span className="font-medium">Twitter</span>
                   </button>
                 </div>
               </div>
@@ -109,7 +106,7 @@ function ModalPopUp({ isOpen, onClose, children }) {
   return (
     <div
       className={`fixed inset-0 z-[1] flex items-center justify-center transition-colors ${
-        isOpen ? "visible bg-black/20" : "invisible"
+        isOpen ? "visible bg-black/40 backdrop-blur-sm" : "invisible"
       }`}
       onClick={onClose}
     >

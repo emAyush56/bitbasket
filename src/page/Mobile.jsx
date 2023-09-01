@@ -9,9 +9,7 @@ function Mobile() {
         </span>
         <span className="block">Please view it on a PC or a Laptop</span>
       </h1>
-      <div className="py-8 text-xs tracking-wide">
-        Made by Ayush, Debarshi and Swarnali
-      </div>
+      <div className="py-8 text-xs tracking-wide">Made by Ayush.</div>
     </div>
   );
 }

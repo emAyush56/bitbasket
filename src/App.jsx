@@ -25,11 +25,6 @@ function App() {
           </Routes>
         </div>
       </main>
-      {/* <footer className="mt-14 text-center">
-        <span className="block text-xs text-gray-600">
-          Made by Ayush, Debarshi and Swarnali
-        </span>
-      </footer> */}
     </>
   );
 }
